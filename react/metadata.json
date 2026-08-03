@@ -1,0 +1,6 @@
+{
+  "name": "ForTheXP Showcase",
+  "description": "An interactive showcase, code playground, and documentation viewer for the ForTheXP gamification engine.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

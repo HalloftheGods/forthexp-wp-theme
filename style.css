@@ -1,0 +1,45 @@
+/*
+Theme Name: ForTheXP Dev Showcase
+Theme URI: https://forthexp.com/theme
+Author: ForTheXP Team
+Author URI: https://forthexp.com
+Description: A high-performance, developer-focused, gamified WordPress theme designed to promote custom XP systems and showcase project documentations.
+Version: 1.0.1
+License: GNU GPL v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: forthexp-theme
+Tags: gamification, clean, slate-dark, dark-mode, developers, documentation, custom-colors
+
+This file is the main entry stylesheet required for WordPress to recognize the theme.
+All visual components are dynamically rendered using high-fidelity inline SVG and tailwind utilities loaded from functions.php.
+*/
+
+/* Reset margins and set core dark slate styling */
+html, body {
+    background-color: #020617; /* bg-slate-950 */
+    color: #cbd5e1; /* text-slate-300 */
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+*, ::before, ::after {
+    box-sizing: inherit;
+}
+
+/* Base custom interactive states for WordPress integration */
+.forthexp-wp-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px border rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.forthexp-wp-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(99, 102, 241, 0.3); /* indigo shadow border */
+    box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.1);
+}
