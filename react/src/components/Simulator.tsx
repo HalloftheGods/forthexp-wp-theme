@@ -47,8 +47,8 @@ export function getLevelInfo(xp: number) {
 }
 
 export const AVAILABLE_ACTIONS: GamificationAction[] = [
-  { id: 'comment', name: 'Post Quality Comment', xpReward: 15, gpReward: 5, description: 'User submits a blog comment', iconName: 'MessageSquare' },
-  { id: 'publish_post', name: 'Publish Article', xpReward: 45, gpReward: 20, apReward: 10, description: 'WordPress author publishes a post', iconName: 'BookOpen' },
+  { id: 'comment', name: 'Post Quality Comment', xpReward: 15, gpReward: 5, description: 'User submits a comment', iconName: 'MessageSquare' },
+  { id: 'publish_post', name: 'Publish Article', xpReward: 45, gpReward: 20, apReward: 10, description: 'Author publishes an article or post', iconName: 'BookOpen' },
   { id: 'debug_code', name: 'Solve Bug Ticket', xpReward: 30, apReward: 25, description: 'Fixed a code bug or reported issue', iconName: 'Bug' },
   { id: 'daily_streak', name: 'Consecutive Daily Visit', xpReward: 10, gpReward: 50, description: 'Logged in 3 days in a row', iconName: 'Flame' },
 ];

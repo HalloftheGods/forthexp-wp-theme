@@ -306,7 +306,7 @@ function notify_level_up_slack($user_id, $new_level) {
           <div className="p-3 bg-indigo-500/5 rounded-xl border border-indigo-500/10 flex gap-2 items-start text-left">
             <Info className="h-4 w-4 text-indigo-400 shrink-0 mt-0.5" />
             <p className="text-[10px] text-slate-400 leading-normal">
-              Copy these snippets directly into your WordPress theme template structure to bind events to database actions immediately.
+              Copy these snippets directly into your app, template structure, or web stack to bind events to XP actions immediately.
             </p>
           </div>
         </div>

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Simulator, { getLevelInfo, GAME_ACHIEVEMENTS } from './components/Simulator';
-import CurrenciesGuide from './components/CurrenciesGuide';
 import CodePlayground from './components/CodePlayground';
 import Documentation from './components/Documentation';
 import WPThemeGuide from './components/WPThemeGuide';
@@ -337,11 +336,8 @@ export default function App() {
       {/* Main Single Page Contents */}
       <main className="flex-1">
         
-        {/* HERO INTRO */}
+        {/* HERO INTRO & TRI-CURRENCY ENGINE */}
         <Hero onCtaclick={handleSectionClick} />
-
-        {/* GAMIFICATION CURRENCIES GUIDE */}
-        <CurrenciesGuide />
 
         {/* INTERACTIVE ENGINE SIMULATOR */}
         <div id="simulator">

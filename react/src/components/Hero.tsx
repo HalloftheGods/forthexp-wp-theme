@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Sparkles, ArrowRight, Code, Database, Compass, Trophy } from 'lucide-react';
+import CurrenciesGuide from './CurrenciesGuide';
 
 interface HeroProps {
   onCtaclick: (sectionId: string) => void;
@@ -10,7 +11,7 @@ export default function Hero({ onCtaclick }: HeroProps) {
     {
       icon: Code,
       title: "Extremely Dev-Friendly",
-      desc: "Integrate using direct REST APIs, native JavaScript SDKs, or clean PHP hooks designed specifically for WordPress themes.",
+      desc: "Integrate using direct REST APIs, native JavaScript SDKs, webhooks, or clean PHP hooks. Connect any app, platform, or framework in minutes.",
       color: "from-indigo-500/20 to-purple-500/10",
       iconColor: "text-indigo-400",
     },
@@ -30,8 +31,8 @@ export default function Hero({ onCtaclick }: HeroProps) {
     },
     {
       icon: Compass,
-      title: "WordPress Theme Perfect",
-      desc: "Ready-to-use shortcodes and widgets that style themselves automatically to match your theme's layout and colors.",
+      title: "Universal Compatibility",
+      desc: "Plug-and-play components, shortcodes, and SDK widgets that style themselves automatically to match your app's layout and colors.",
       color: "from-violet-500/20 to-fuchsia-500/10",
       iconColor: "text-violet-400",
     },
@@ -54,7 +55,7 @@ export default function Hero({ onCtaclick }: HeroProps) {
           className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-indigo-400 font-mono mb-8 backdrop-blur-md"
         >
           <Sparkles className="h-3.5 w-3.5" />
-          <span>Announcing ForTheXP.com Gamification Engine</span>
+          <span>Universal Gamification Engine</span>
         </motion.div>
 
         {/* Hero Title */}
@@ -65,7 +66,7 @@ export default function Hero({ onCtaclick }: HeroProps) {
           className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.1] mb-6"
         >
           Inject <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-500">Game Mechanics</span> <br />
-          Into Any WordPress Theme
+          Into Anything
         </motion.h1>
 
         {/* Hero Subtitle */}
@@ -75,7 +76,7 @@ export default function Hero({ onCtaclick }: HeroProps) {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-slate-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10"
         >
-          A lightweight, lightning-fast XP gamification engine designed to skyrocket user engagement. Reward comments, page views, logins, and social shares with beautiful live leveling and custom badges.
+          A complete, lightweight XP gamification engine designed to skyrocket user engagement. Gamify your SaaS platform, e-commerce store, online community, or corporate CRM with live leveling and instant rewards.
         </motion.p>
 
         {/* CTA Actions */}
@@ -83,7 +84,7 @@ export default function Hero({ onCtaclick }: HeroProps) {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
         >
           <button
             onClick={() => onCtaclick('simulator')}
@@ -100,6 +101,16 @@ export default function Hero({ onCtaclick }: HeroProps) {
           >
             Explore Interactive Snippets
           </button>
+        </motion.div>
+
+        {/* TRI-CURRENCY ENGINE (HIGHLIGHTED ABOVE THE FOLD) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mb-14"
+        >
+          <CurrenciesGuide />
         </motion.div>
 
         {/* Feature Grid */}

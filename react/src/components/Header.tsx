@@ -68,7 +68,7 @@ export default function Header({ onSectionClick, activeSection }: HeaderProps) {
           </span>
           <span className="text-[11px] px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-mono flex items-center gap-1.5 font-medium">
             <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
-            WP 7.0+ Ready
+            Universal Engine
           </span>
         </div>
 
