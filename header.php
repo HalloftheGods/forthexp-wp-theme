@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> style="background-color: #020617; color-scheme: dark;">
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#020617">
+    <style>
+        :root, html, body {
+            background-color: #020617 !important;
+            color: #cbd5e1;
+            color-scheme: dark;
+        }
+    </style>
     <!-- Prefetch for smooth font delivery -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <?php wp_head(); ?>
 </head>
-<body <?php body_class('bg-slate-950 text-slate-300 font-sans min-h-screen antialiased selection:bg-indigo-500/20 selection:text-white'); ?>>
+<body <?php body_class('bg-slate-950 text-slate-300 font-sans min-h-screen antialiased selection:bg-indigo-500/20 selection:text-white'); ?> style="background-color: #020617;">
 
 <!-- Dynamic WordPress Header with Tailwind UI Style -->
 <header class="sticky top-0 z-50 bg-white/5 backdrop-blur-md border-b border-white/10 px-6 py-4">

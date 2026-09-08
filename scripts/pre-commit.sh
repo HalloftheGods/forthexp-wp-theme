@@ -16,6 +16,11 @@ if [ -n "$STAGED_REACT" ]; then
   echo "[pre-commit] Staged changes detected in react/. Rebuilding react-dist..."
   
   if [ -d "react" ]; then
+    if [ -s "$HOME/.nvm/nvm.sh" ]; then
+      export NVM_DIR="$HOME/.nvm"
+      . "$NVM_DIR/nvm.sh"
+    fi
+
     npm --prefix react run build || {
       echo "[pre-commit] ERROR: react build failed!"
       exit 1

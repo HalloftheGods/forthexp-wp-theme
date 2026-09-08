@@ -328,7 +328,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-300 font-sans selection:bg-emerald-500/20 antialiased flex flex-col justify-between pb-20">
+    <div className="min-h-screen bg-slate-950 text-slate-300 font-sans selection:bg-emerald-500/20 antialiased flex flex-col justify-between pb-20">
       
       {/* Navigation Header */}
       <Header onSectionClick={handleSectionClick} activeSection={activeSection} />

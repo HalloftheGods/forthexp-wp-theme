@@ -7,3 +7,9 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
+:root, html, body {
+  background-color: #020617;
+  color-scheme: dark;
+}
+
+

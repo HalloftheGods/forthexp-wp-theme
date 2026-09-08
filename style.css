@@ -16,9 +16,14 @@ All visual components are dynamically rendered using high-fidelity inline SVG an
 */
 
 /* Reset margins and set core dark slate styling */
+:root {
+    color-scheme: dark;
+}
+
 html, body {
     background-color: #020617; /* bg-slate-950 */
     color: #cbd5e1; /* text-slate-300 */
+    color-scheme: dark;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     margin: 0;
     padding: 0;
