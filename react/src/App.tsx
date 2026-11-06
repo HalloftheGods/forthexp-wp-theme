@@ -8,6 +8,7 @@ import WPThemeGuide from './components/WPThemeGuide';
 import PricingTable from './components/PricingTable';
 import Footer from './components/Footer';
 import HudBar from './components/HudBar';
+import GamesTeaser from './components/games/GamesTeaser';
 import { LogEntry, EngineState } from './types';
 import { playLevelUpSound, playXpSound } from './utils/audio';
 
@@ -17,6 +18,10 @@ declare global {
       rest_url: string;
       nonce: string;
       is_logged_in: boolean;
+      /** The theme folder's URL, for assets/ (functions.php). */
+      theme_url?: string;
+      /** The Games page, or the front page's #games section when there is none. */
+      games_url?: string;
     };
   }
 }
@@ -338,6 +343,9 @@ export default function App() {
         
         {/* HERO INTRO & TRI-CURRENCY ENGINE */}
         <Hero onCtaclick={handleSectionClick} />
+
+        {/* GAMES SHOWCASE (components/games/, data in games/games.ts) */}
+        <GamesTeaser />
 
         {/* INTERACTIVE ENGINE SIMULATOR */}
         <div id="simulator">

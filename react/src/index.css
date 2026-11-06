@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
+/* The PHP templates (header.php, footer.php, page-games.php) use utility classes too. */
+@source "../../*.php";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -10,6 +12,25 @@
 :root, html, body {
   background-color: #020617;
   color-scheme: dark;
+}
+
+/* Pixel art at a whole-number scale with hard edges (components/games/PixelImage.tsx). */
+.pixel-art {
+  --px-scale: var(--px-s1, 1);
+  width: calc(var(--px-w) * var(--px-scale) * 1px);
+  height: calc(var(--px-h) * var(--px-scale) * 1px);
+  max-width: none;
+  flex: none;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
+@media (min-width: 640px) {
+  .pixel-art { --px-scale: var(--px-s2, var(--px-s1, 1)); }
+}
+
+@media (min-width: 1024px) {
+  .pixel-art { --px-scale: var(--px-s3, var(--px-s2, var(--px-s1, 1))); }
 }
 
 

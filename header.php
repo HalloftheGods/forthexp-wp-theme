@@ -21,7 +21,7 @@
 <body <?php body_class('bg-slate-950 text-slate-300 font-sans min-h-screen antialiased selection:bg-indigo-500/20 selection:text-white'); ?> style="background-color: #020617;">
 
 <!-- Dynamic WordPress Header with Tailwind UI Style -->
-<header class="sticky top-0 z-50 bg-white/5 backdrop-blur-md border-b border-white/10 px-6 py-4">
+<header class="relative md:sticky md:top-0 z-50 bg-white/5 backdrop-blur-md border-b border-white/10 px-6 py-4">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         
         <!-- Logo and Brand -->
@@ -55,13 +55,18 @@
                     'after' => '</span>'
                 ));
             } else {
-                // Fallback list
-                $pages = get_pages(array('number' => 4));
+                // Fallback list (the Games page gets its own link below)
+                $games_page = forthexp_games_page();
+                $pages = get_pages(array('number' => 4, 'exclude' => $games_page ? array($games_page->ID) : array()));
                 foreach ($pages as $page) {
                     echo '<a href="' . esc_url(get_page_link($page->ID)) . '" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium tracking-tight transition-all duration-200 text-slate-400 hover:text-white hover:bg-white/5">' . esc_html($page->post_title) . '</a>';
                 }
             }
             ?>
+            <a href="<?php echo esc_url(forthexp_games_url()); ?>" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium tracking-tight transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 <?php echo is_page('games') ? 'bg-white/15 text-white border border-white/10 font-semibold' : 'text-slate-400 hover:text-white hover:bg-white/5'; ?>" id="nav-games"<?php echo is_page('games') ? ' aria-current="page"' : ''; ?>>
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 11h4M8 9v4M15 12h.01M18 10h.01M17.32 5H6.68a4 4 0 0 0-3.98 3.59l-.9 8.06A2.5 2.5 0 0 0 4.3 19.4c.94 0 1.8-.53 2.23-1.36L7.5 16h9l.97 2.04a2.5 2.5 0 0 0 2.23 1.36 2.5 2.5 0 0 0 2.49-2.75l-.9-8.06A4 4 0 0 0 17.32 5z"/></svg>
+                Games
+            </a>
         </nav>
 
         <!-- External Tags & Quick Info -->

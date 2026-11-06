@@ -29,6 +29,22 @@ function forthexp_theme_setup() {
 add_action('after_setup_theme', 'forthexp_theme_setup');
 
 /**
+ * The published Games page (slug "games"), which page-games.php renders, or null.
+ */
+function forthexp_games_page() {
+    $page = get_page_by_path('games');
+    return ($page && 'publish' === $page->post_status) ? $page : null;
+}
+
+/**
+ * Where "Games" links go: the Games page, or the front page's Games section until it exists.
+ */
+function forthexp_games_url() {
+    $page = forthexp_games_page();
+    return $page ? get_permalink($page) : home_url('/#games');
+}
+
+/**
  * 2. ENQUEUE STYLESHEETS & SCRIPTS
  */
 function forthexp_enqueue_scripts() {
@@ -43,6 +59,8 @@ function forthexp_enqueue_scripts() {
         'rest_url' => esc_url_raw(rest_url('xp/v1')),
         'nonce'    => wp_create_nonce('wp_rest'),
         'is_logged_in' => is_user_logged_in(),
+        'theme_url' => get_template_directory_uri(),
+        'games_url' => forthexp_games_url(),
     ));
 
     // Enqueue built React App assets
@@ -51,8 +69,8 @@ function forthexp_enqueue_scripts() {
     $css_ver = file_exists($css_path) ? filemtime($css_path) : '1.0.0';
     wp_enqueue_style('forthexp-react-styles', get_template_directory_uri() . '/react-dist/assets/index.css', array(), $css_ver);
 
-    // Enqueue React JS only on the front page/home where the app mounts.
-    if (is_front_page() || is_home()) {
+    // Enqueue React JS only where it mounts: the front page/home (#root) and the Games page.
+    if (is_front_page() || is_home() || is_page('games')) {
         $js_path = get_template_directory() . '/react-dist/assets/index.js';
         $js_ver = file_exists($js_path) ? filemtime($js_path) : '1.0.0';
         wp_enqueue_script('forthexp-react-app', get_template_directory_uri() . '/react-dist/assets/index.js', array(), $js_ver, true);

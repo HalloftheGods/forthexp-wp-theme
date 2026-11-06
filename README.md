@@ -95,3 +95,65 @@ function forthexp_enqueue_react_bundle() {
 add_action('wp_enqueue_scripts', 'forthexp_enqueue_react_bundle');
 ```
 Then, render a container element `<div id="root"></div>` in any template page like `index.php` or a page template, and React will automatically mount and boot on your WordPress theme without any static compiling conflicts!
+
+---
+
+## 🎮 Games section
+
+A data-driven showcase of playable games. The first entry is **Undead of Night: Last Round** (Hall of the Gods, Inc.), played at <https://undeadofnight.forthexp.com>.
+
+### Where it shows
+
+| Place | How |
+| :--- | :--- |
+| Front page | `GamesTeaser` in the React app (`#games` section, after the hero). |
+| Navigation | A **Games** link in the React header (`react/src/components/Header.tsx`) and in the PHP header (`header.php`, after the menu or the page fallback list). |
+| Games page | `page-games.php`, picked by WordPress for a published page with the slug `games`. It renders the PHP header and footer and mounts the React `GamesPage` in `#forthexp-games-root`. |
+
+Until a `games` page exists, every Games link goes to the front page's `#games` section (`forthexp_games_url()` in `functions.php`).
+
+### Adding a game
+
+1. Add a `Game` record to `GAMES` in `react/src/games/games.ts` (types in `react/src/games/types.ts`). Describe only what ships today.
+2. Put its PNGs in `assets/games/<id>/`. Pixel art is shown at whole-number scales with hard edges (`PixelImage` and `.pixel-art` in `react/src/index.css`); give each picture its art's own size (`w`, `h`) so the scale stays whole.
+3. Rebuild: `npm --prefix react run build` (or `pnpm build:forthexp` from the monorepo root), and commit `react-dist/`.
+
+The Undead of Night PNGs are exported from the game's own art book (`apps/zombie-survival/src/art`), nearest-neighbour upscaled (6x for the 56x40 cards, cartridge and busts, 3x for the logo and the hero), about 140 KB in all.
+
+**Meet the survivors** (the five character-select busts) is one self-contained block. To take it out: delete `react/src/components/games/MeetTheSurvivors.tsx`, its entry in `GAME_EXTRAS` in `react/src/components/games/GamesPage.tsx`, and `assets/games/undead-of-night/survivors/`, then rebuild.
+
+### Files this change touched
+
+- New: `page-games.php`, `assets/games/undead-of-night/*.png` (+ `survivors/`), `react/src/games/{types,games,assets}.ts`, `react/src/components/games/{PixelImage,GameShowcase,GamesTeaser,GamesPage,MeetTheSurvivors}.tsx`.
+- Changed: `functions.php` (`forthexp_games_page()`, `forthexp_games_url()`, `theme_url` and `games_url` in `forthexp_opts`, the React bundle also loads on the Games page), `header.php` (Games link; the header is sticky from `md` up only, so the wrapped phone nav no longer covers the page), `react/src/main.tsx` (mounts `App` on `#root` and `GamesPage` on `#forthexp-games-root`, and nothing when neither is on the page), `react/src/App.tsx`, `react/src/components/Header.tsx`, `react/src/index.css` (`.pixel-art`, and `@source "../../*.php"` so Tailwind also builds the classes the PHP templates use), `react-dist/assets/index.{js,css}`.
+
+### How the theme reaches www.forthexp.com
+
+- The live site is blog 77 (`https://www.forthexp.com`) of the multisite at `~/site/public_html` on `mycompass.tempurl.host`. Its theme folder is a plain copy (no git checkout) at `wp-content/themes/forthexp-wp-theme`, version 26.9.15-1188 when checked on 2026-11-06.
+- A push to `main` here runs `.github/workflows/compass.yml`, which calls the shared `HalloftheGods/.github` pipeline: it bumps the version in `style.css` and publishes a GitHub release `v<version>` with `forthexp-wp-theme-<version>.zip` (the repo minus `.git/`, `.github/`, `node_modules/`, `*.zip`). The network-active **xophz-compass** plugin's updater (`includes/class-xophz-compass-updater.php`, through the `Update URI` header) then offers that release as a theme update.
+- Front page: Settings → Reading is "A static page" with **Front Page** (ID 4) as the front page. WordPress renders it with this theme's `front-page.php` (the React app), because `front-page.php` outranks any page template; page 4's slug `one-page-express` and its `default` template are leftovers with no effect.
+
+### Publishing (run by you)
+
+```bash
+# 1. Push the theme, then the monorepo pointer
+git -C wp-content/themes/forthexp-wp-theme push origin main
+git push origin main
+# 2. Wait for the Compass workflow to publish the new release
+gh release list -R HalloftheGods/forthexp-wp-theme -L 3
+# 3. Back up the live copy, then update the theme on the server
+ssh mycompass.tempurl.host 'cp -a ~/site/public_html/wp-content/themes/forthexp-wp-theme ~/backups/forthexp-wp-theme-26.9.15-1188'
+ssh mycompass.tempurl.host 'cd ~/site/public_html && wp theme update forthexp-wp-theme'
+#    (or Network Admin → Themes → Update)
+# 4. Create the Games page on www.forthexp.com (default template; the slug picks page-games.php)
+ssh mycompass.tempurl.host 'cd ~/site/public_html && wp --url=https://www.forthexp.com post create --post_type=page --post_title=Games --post_name=games --post_status=publish'
+```
+
+No menu work is needed: no menu is assigned to `primary-menu`, and the PHP header adds the Games link itself. If a menu is assigned later, leave Games out of it or the link shows twice.
+
+### Rolling back
+
+- Restore the backup: `ssh mycompass.tempurl.host 'rm -rf ~/site/public_html/wp-content/themes/forthexp-wp-theme && cp -a ~/backups/forthexp-wp-theme-26.9.15-1188 ~/site/public_html/wp-content/themes/forthexp-wp-theme'`.
+- Or reinstall the previous release: `wp theme install https://github.com/HalloftheGods/forthexp-wp-theme/releases/download/v26.9.15/forthexp-wp-theme-26.9.15.zip --force` (check the asset name with `gh release view v26.9.15 -R HalloftheGods/forthexp-wp-theme`).
+- Or `git revert` the Games commit here and push, which publishes a new release without it.
+- The Games page can stay: without `page-games.php` it falls back to `index.php`. Trash it with `wp --url=https://www.forthexp.com post delete <id>` if wanted.
