@@ -69,8 +69,8 @@ function forthexp_enqueue_scripts() {
     $css_ver = file_exists($css_path) ? filemtime($css_path) : '1.0.0';
     wp_enqueue_style('forthexp-react-styles', get_template_directory_uri() . '/react-dist/assets/index.css', array(), $css_ver);
 
-    // Enqueue React JS only where it mounts: the front page/home (#root) and the Games page.
-    if (is_front_page() || is_home() || is_page('games')) {
+    // Enqueue React JS only where it mounts: the front page/home (#root), the Games page, and the Arcade page.
+    if (is_front_page() || is_home() || is_page('games') || is_page('arcade')) {
         $js_path = get_template_directory() . '/react-dist/assets/index.js';
         $js_ver = file_exists($js_path) ? filemtime($js_path) : '1.0.0';
         wp_enqueue_script('forthexp-react-app', get_template_directory_uri() . '/react-dist/assets/index.js', array(), $js_ver, true);

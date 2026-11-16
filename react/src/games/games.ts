@@ -1,5 +1,5 @@
 // The Games section's catalogue. Add a game by adding a record here and its PNGs under
-// assets/games/<id>/. Describe only what ships today.
+// assets/games/<id>/. Describe only what ships today or in development.
 
 import type { Game, GameArt } from './types';
 
@@ -118,4 +118,68 @@ export const UNDEAD_OF_NIGHT: Game = {
   links: [{ label: 'Play in your browser', href: 'https://undeadofnight.forthexp.com' }],
 };
 
-export const GAMES: readonly Game[] = [UNDEAD_OF_NIGHT];
+export const TALES_OF_XADION: Game = {
+  id: 'tales-of-xadion',
+  title: 'The Tales of Xadion: Lightning in a Bottle',
+  studio: 'Hall of the Gods, Inc.',
+  tagline: 'An authentic 16-bit HD-2D tactical RPG experience across the mystical realms of Xadion.',
+  description:
+    'Venture through enchanted realms in a rich story-driven tactical pixel RPG. Master magic, bond with allies, and discover ancient secrets in the expanding Tales of Xadion universe.',
+  status: 'in-development',
+  statusNote: 'In active development for web and native platforms.',
+  playUrl: 'https://undeadofnight.forthexp.com',
+  hero: {
+    src: `${UON}/hero.png`,
+    alt: 'The Tales of Xadion logo and fantasy world',
+    w: 280,
+    h: 200,
+  },
+  logo: { src: `${UON}/logo.png`, alt: 'The Tales of Xadion', w: 276, h: 94 },
+  tags: ['16-bit RPG', 'HD-2D', 'Tactical', 'Story Rich', 'Pixel Art'],
+  features: [
+    {
+      title: 'Epic Tactical Combat',
+      text: 'Grid-based tactical skirmishes with elemental synergies and combo attacks.',
+    },
+    {
+      title: 'Handcrafted Pixel Art',
+      text: 'Rich retro 16-bit visual aesthetics with modern dynamic lighting.',
+    },
+  ],
+  galleries: [],
+  links: [{ label: 'View Roadmap', href: '#arcade' }],
+};
+
+export const KHRO_FIGHTER: Game = {
+  id: 'khro-fighter',
+  title: 'Khro Fighter',
+  studio: 'Hall of the Gods, Inc.',
+  tagline: 'High-octane retro horizontal shoot-em-up in the spirit of classic R-Type arcade shooters.',
+  description:
+    'Piloting the experimental Khro starfighter, navigate treacherous alien starbases, weave through dense bullet curtains, and deploy devastating wave-beam weaponry against cosmic horrors.',
+  status: 'in-development',
+  statusNote: 'Upcoming arcade shooter prototype.',
+  playUrl: 'https://undeadofnight.forthexp.com',
+  hero: {
+    src: `${UON}/hero.png`,
+    alt: 'Khro Fighter arcade marquee',
+    w: 280,
+    h: 200,
+  },
+  logo: { src: `${UON}/logo.png`, alt: 'Khro Fighter', w: 276, h: 94 },
+  tags: ['Shmup', 'Arcade', 'R-Type style', 'Horizontal shooter', 'Pixel art'],
+  features: [
+    {
+      title: 'Wave-Beam Charge System',
+      text: 'Charge concentrated plasma bursts or fire rapid-fire vulcan cannons.',
+    },
+    {
+      title: 'Arcade Scoring & Leaderboards',
+      text: 'Chain enemy destructions for massive score multipliers and global XP.',
+    },
+  ],
+  galleries: [],
+  links: [{ label: 'Arcade Preview', href: '#arcade' }],
+};
+
+export const GAMES: readonly Game[] = [UNDEAD_OF_NIGHT, TALES_OF_XADION, KHRO_FIGHTER];

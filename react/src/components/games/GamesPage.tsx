@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react';
-import { Gamepad2 } from 'lucide-react';
+import { Gamepad2, Tv } from 'lucide-react';
 import { GAMES } from '../../games/games';
+import { ArcadeCabinet } from '../arcade/ArcadeCabinet';
 import GameShowcase from './GameShowcase';
 import MeetTheSurvivors from './MeetTheSurvivors';
 
@@ -20,11 +21,19 @@ export default function GamesPage() {
             <Gamepad2 className="h-3.5 w-3.5" aria-hidden="true" />
             {GAMES.length === 1 ? '1 game' : `${GAMES.length} games`}
           </p>
-          <h1 className="font-display font-bold text-4xl sm:text-5xl text-white tracking-tight">Games</h1>
-          <p className="text-slate-400 max-w-2xl leading-relaxed">Games you can play right now, in your browser.</p>
+          <h1 className="font-display font-bold text-4xl sm:text-5xl text-white tracking-tight">Arcade & Games</h1>
+          <p className="text-slate-400 max-w-2xl leading-relaxed">
+            Play directly in our retro pixel arcade or explore the full titles below. Powered by the @knerd/gui Canvas 2D engine.
+          </p>
           {GAMES.length > 1 && (
             <nav aria-label="Games on this page">
               <ul className="flex flex-wrap justify-center md:justify-start gap-2 pt-2">
+                <li>
+                  <a href="#arcade" className="text-sm px-3 py-1.5 rounded-lg bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 hover:text-white inline-flex items-center gap-1.5">
+                    <Tv className="w-3.5 h-3.5" />
+                    Live Arcade Cabinet
+                  </a>
+                </li>
                 {GAMES.map((game) => (
                   <li key={game.id}>
                     <a href={`#game-${game.id}`} className="text-sm px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-slate-300 hover:text-white">{game.title}</a>
@@ -34,6 +43,13 @@ export default function GamesPage() {
             </nav>
           )}
         </header>
+
+        {/* Live Arcade Cabinet Section */}
+        <section id="arcade" aria-label="Playable Arcade Cabinet" className="space-y-4">
+          <ArcadeCabinet />
+        </section>
+
+        {/* Individual Game Showcases */}
         {GAMES.map((game) => {
           const Extra = GAME_EXTRAS[game.id];
           return (
